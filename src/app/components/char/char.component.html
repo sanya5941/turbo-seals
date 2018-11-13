@@ -1,0 +1,32 @@
+<div class="char">
+  <p class="name">{{ char.getName() }}</p>
+  <div class="avatar" [ngStyle]="{ 'background-image': 'url(' + char.getAvatarPath() + ')' }"></div>
+  <div class="main-info">
+    <p class="main-info__item">Level: {{ char.getLevel() }}</p>
+    <p class="main-info__item">Health: {{ char.getHealth() }}/{{ char.getMaxHealth() }}</p>
+    <p class="main-info__item">Money: {{ char.getMoney() }} galics</p>
+    <p class="main-info__item">Exp: {{ char.getExperience() }}/{{ char.getExperienceNextLevel() }}</p>
+  </div>
+  <div class="skills">
+    <p class="skills__item">
+      Power: {{ char.getSkills().power }}
+      <span class="skills__add-value" *ngIf="char.getInventory().getSkills().power"> + {{ char.getInventory().getSkills().power }}</span>
+    </p>
+    <p class="skills__item">
+      Strength: {{ char.getSkills().strength }}
+      <span class="skills__add-value" *ngIf="char.getInventory().getSkills().strength"> + {{ char.getInventory().getSkills().strength }}</span>
+    </p>
+    <p class="skills__item">
+      Agility: {{ char.getSkills().agility }}
+      <span class="skills__add-value" *ngIf="char.getInventory().getSkills().agility"> + {{ char.getInventory().getSkills().agility }}</span>
+    </p>
+    <p class="skills__item">
+      Rate of fire: {{ char.getSkills().fireRate }}
+      <span class="skills__add-value" *ngIf="char.getInventory().getSkills().fireRate"> + {{ char.getInventory().getSkills().fireRate }}</span>
+    </p>
+    <p class="skills__item">
+      Accuracy: {{ char.getSkills().accuracy }}
+      <span class="skills__add-value" *ngIf="char.getInventory().getSkills().accuracy"> + {{ char.getInventory().getSkills().accuracy }}</span>
+    </p>
+  </div>
+</div>

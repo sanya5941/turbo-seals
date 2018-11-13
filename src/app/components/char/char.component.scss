@@ -1,0 +1,39 @@
+.char {
+    .name {
+        margin-bottom: 15px;
+        font-size: 6.6rem;
+    }
+
+    .avatar {
+        width: 250px;
+        height: 350px;
+        margin-bottom: 10px;
+
+        background-position: center;
+        background-size: cover;
+    }
+    
+    .main-info {
+        margin-bottom: 15px;
+
+        &__item {
+            margin-bottom: 5px;
+
+            font-size: 1.6rem;
+        }
+    }
+
+    .skills {
+        margin-bottom: 15px;
+
+        &__item {
+            margin-bottom: 5px;
+
+            font-size: 1.4rem;
+        }
+
+        &__add-value {
+            color: green;
+        }
+    }
+}
