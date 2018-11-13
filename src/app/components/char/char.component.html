@@ -4,8 +4,8 @@
   <div class="main-info">
     <p class="main-info__item">Level: {{ char.getLevel() }}</p>
     <p class="main-info__item">Health: {{ char.getHealth() }}/{{ char.getMaxHealth() }}</p>
-    <p class="main-info__item">Money: {{ char.getMoney() }} galics</p>
-    <p class="main-info__item">Exp: {{ char.getExperience() }}/{{ char.getExperienceNextLevel() }}</p>
+    <p class="main-info__item" *ngIf="public">Money: {{ char.getMoney() }} galics</p>
+    <p class="main-info__item" *ngIf="public">Exp: {{ char.getExperience() }}/{{ char.getExperienceNextLevel() }}</p>
   </div>
   <div class="skills">
     <p class="skills__item">

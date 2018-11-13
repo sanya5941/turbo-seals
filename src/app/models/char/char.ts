@@ -35,6 +35,10 @@ export class Char {
         return this.level;
     }
 
+    public setLevel(level: number) {
+        this.level = level;
+    }
+
     private levelUp(): void {
         ++this.level;
 
@@ -77,6 +81,16 @@ export class Char {
         return this.health;
     }
 
+    public reduceHealth(value: number): boolean {
+        if (this.health <= 0) {
+            this.health = 0;
+            return false;
+        }
+
+        this.health = Math.round(this.health - value);
+        return true;
+    }
+
     public setHealth(health: number) {
         this.health = Math.floor(this.health + health);
 
@@ -93,7 +107,50 @@ export class Char {
         return this.skills;
     }
 
+    public getTotalSkills(): Skills {
+        let skills = new Skills();
+        skills.add(this.getSkills());
+        skills.add(this.getInventory().getSkills());
+
+        return skills;
+    }
+
     public getAvatarPath(): string {
         return this.avatarPath;
+    }
+
+    public kick(enemy: Char): number {
+        // enemySkills = new Skills(4, 5, 1, 4, 3);
+        // this.skills = new Skills(1, 0, 50, 1, 1);
+
+        let damage: number = 0;
+
+        let enemySkills = enemy.getTotalSkills();
+        let skills = this.getTotalSkills();
+
+        let power = enemySkills.power;
+        power += enemySkills.accuracy;
+        let protection = skills.strength ? skills.strength : 1;
+        let punch = Math.ceil(power / protection);
+
+        let dodge = skills.agility * this.getHealth() / this.getMaxHealth() / 2;
+        if (dodge <= Math.random() * 100) {
+            damage += punch;
+            this.reduceHealth(punch);
+            this.addExperience(1);
+        }
+
+        let secondPunch = enemySkills.agility + enemySkills.fireRate;
+        if (secondPunch >= Math.random() * 100) {
+
+            let dodge = skills.agility * this.getHealth() / this.getMaxHealth() / 2;
+            if (dodge <= Math.random() * 100) {
+                damage += punch;
+                this.reduceHealth(punch);
+                this.addExperience(1);
+            }
+        }
+
+        return damage;
     }
 }

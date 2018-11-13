@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { CharComponent } from './components/char/char.component';
 import { CharsService } from './services/chars.service';
 import { PagePlayerComponent } from './pages/page-player/page-player.component';
+import { PageArenaComponent } from './pages/page-arena/page-arena.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CharComponent,
-    PagePlayerComponent
+    PagePlayerComponent,
+    PageArenaComponent
   ],
   imports: [
     BrowserModule,

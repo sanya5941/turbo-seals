@@ -1,0 +1,30 @@
+.arena {
+    display: flex;
+    justify-content: space-between;
+
+    .heading {
+        font-size: 8.8rem;
+    }
+
+    .button-fight {
+        width: 100%;
+        padding: 5px 0;
+    }
+
+    .logs {
+        height: 400px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        overflow-y: auto;
+
+        &__item {
+            margin-bottom: 5px;
+            
+            font-size: 1.6rem;
+        }
+    }
+
+    .winner {
+        font-size: 4.4rem;
+    }
+}
