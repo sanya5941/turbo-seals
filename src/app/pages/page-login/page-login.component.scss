@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'gta';
+    src: url(/assets/fonts/gta_russian_regular.ttf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+.page-login {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-image: url(/assets/img/art.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    .page-heading {
+        font-family: 'gta';
+        font-size: 12rem;
+
+        position: absolute;
+        top: 40px;
+        left: 25%;
+
+        color: white;
+        text-shadow: 0 0 37px black;
+    }
+}

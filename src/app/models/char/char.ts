@@ -14,17 +14,17 @@ export class Char {
     private skills: Skills;
     private avatarPath: string;
 
-    constructor(name: string, avatarPath: string) {
+    constructor(name: string) {
         this.name = name;
         this.level = 1;
-        this.money = 10;
+        this.money = 0;
         this.experience = 0;
         this.maxHealth = 100;
         this.setMaxHealth();
         this.health = this.maxHealth;
         this.inventory = new Inventory();
         this.skills = new Skills(1, 1, 1, 1, 1);
-        this.avatarPath = avatarPath;
+        this.avatarPath = 'assets/img/avatar.jpg';
     }
 
     public getName(): string {
@@ -49,12 +49,20 @@ export class Char {
         return this.money;
     }
 
+    public setMoney(money: number): void {
+        this.money = money;
+    }
+
     public addMoney(money: number): void {
         this.money += money;
     }
 
     public getExperience(): number {
         return this.experience;
+    }
+
+    public setExperience(experience: number) {
+        this.experience = experience;
     }
 
     public getExperienceNextLevel(): number {
@@ -103,6 +111,10 @@ export class Char {
         return this.inventory;
     }
 
+    public setInventory(inventory: Inventory): void {
+        this.inventory = inventory;
+    }
+
     public getSkills(): Skills {
         return this.skills;
     }
@@ -115,8 +127,16 @@ export class Char {
         return skills;
     }
 
+    public setSkills(skills: Skills): void {
+        this.skills = skills;
+    }
+
     public getAvatarPath(): string {
         return this.avatarPath;
+    }
+
+    public setAvatarPath(path: string): void {
+        this.avatarPath = path;
     }
 
     public kick(enemy: Char): number {

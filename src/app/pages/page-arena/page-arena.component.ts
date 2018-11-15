@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Char } from '../../models/char/char';
 import { CharsService } from '../../services/chars.service';
+import { PlayersService } from '../../services/players.service';
 
 @Component({
   selector: 'app-page-arena',
@@ -9,47 +10,49 @@ import { CharsService } from '../../services/chars.service';
 })
 export class PageArenaComponent implements OnInit {
 
-  private player: Char;
+  private playerChar: Char;
   private bot: Char;
 
-  private logs: string[];
-  private done: boolean;
-  private winner: Char;
+  private fighting;
 
   constructor(
-    private charsService: CharsService
+    private charsService: CharsService,
+    private playersService: PlayersService
   ) { 
-    this.player = charsService.getPlayerChar();
-    this.bot = charsService.getBot(this.player);
-    this.logs = [];
-    this.done = false;
-    this.winner = null;
+    this.playerChar = this.playersService.getPlayer().getChar();
+    this.bot = charsService.getBot(this.playerChar);
+
+    this.fighting = {
+      logs: [],
+      done: false,
+      winner: null
+    }
   }
 
   ngOnInit() {
   }
 
   public fight(): void {
-    for (let i = 0; this.bot.getHealth() > 0, this.player.getHealth() > 0, i < 20; i++) {
+    for (let i = 0; this.bot.getHealth() > 0, this.playerChar.getHealth() > 0, i < 20; i++) {
       let damage = 0;
 
-      damage = this.bot.kick(this.player);
-      this.addLog(`${this.player.getName()} does damage ${damage}.`);
+      damage = this.bot.kick(this.playerChar);
+      this.addLog(`${this.playerChar.getName()} does damage ${damage}.`);
 
-      damage = this.player.kick(this.bot);
+      damage = this.playerChar.kick(this.bot);
       this.addLog(`${this.bot.getName()} does damage ${damage}.`);
     }
 
-    this.done = true;
-    if (this.player.getHealth() >= this.bot.getHealth()) {
-      this.winner = this.player;
+    this.fighting.done = true;
+    if (this.playerChar.getHealth() >= this.bot.getHealth()) {
+      this.fighting.winner = this.fighting.player;
     } else {
-      this.winner = this.bot;
+      this.fighting.winner = this.bot;
     }
   }
 
   private addLog(log): void {
-    this.logs.push(log);
+    this.fighting.logs.push(log);
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Char } from '../../models/char/char';
-import { CharsService } from '../../services/chars.service';
+import { PlayersService } from '../../services/players.service';
 
 @Component({
   selector: 'app-page-player',
@@ -12,12 +12,12 @@ export class PagePlayerComponent implements OnInit {
   private char: Char;
 
   constructor(
-    private charsService: CharsService
+    private playersService: PlayersService
   ) { 
-    this.char = charsService.getPlayerChar();
+    this.char = this.playersService.getPlayer().getChar();
   }
 
   ngOnInit() {
+    
   }
-
 }

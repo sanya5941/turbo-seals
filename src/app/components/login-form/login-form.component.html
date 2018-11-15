@@ -1,0 +1,15 @@
+<form class="form" #loginForm="ngForm" (ngSubmit)="onSubmit()">
+  <p class="form-heading">Login</p>
+  <div class="input-group">
+    <label class="label">Email</label>
+    <input class="input" type="text" [(ngModel)]="email" name="email" id="email" required />
+  </div>
+  <div class="input-group">
+    <label class="label">Password</label>
+    <input class="input" type="password" [(ngModel)]="pass" name="pass" id="pass" required />
+  </div>
+  <div class="buttons">
+    <button class="btn-submit" type="submit" >Login</button>
+    <a routerLink="/registration" class="registration-link">New player?</a>
+  </div>
+</form>

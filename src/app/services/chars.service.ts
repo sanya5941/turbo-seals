@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Char } from '../models/char/char';
 import { Turbine } from '../models/char/inventory/turbine';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +11,10 @@ export class CharsService {
 
   private playerChar: Char;
 
-  constructor() { 
-    this.playerChar = new Char('Alex', 'assets/img/avatar.jpg');
+  constructor(
+    private http: HttpClient
+  ) { 
+    this.playerChar = new Char('Alex');
     this.playerChar.getSkills().power = 3;
 
     let turbine = new Turbine('Стартовая турбина', 3); 
@@ -18,12 +22,12 @@ export class CharsService {
     this.playerChar.getInventory().addThing(turbine);
   }
 
-  public getPlayerChar(): Char {
-    return this.playerChar;
+  public getPlayerChar(): Observable<any> {
+    return this.http.get('http://localhost:3000/chars');
   }
 
   public getBot(char: Char): Char {
-    let bot = new Char('Bot', 'assets/img/bot.jpg');
+    let bot = new Char('Bot');
 
     let diff = 3;
 

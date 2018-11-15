@@ -1,0 +1,23 @@
+<form class="form" #registrationForm="ngForm" (ngSubmit)="onSubmit()">
+  <p class="form-heading">Registration</p>
+  <div class="input-group">
+    <label class="label">Name</label>
+    <input class="input" type="text" [(ngModel)]="name" id="name" name="name" required />
+  </div>
+  <div class="input-group">
+    <label class="label">Password</label>
+    <input class="input" type="password" [(ngModel)]="pass" id="pass" name="pass" required />
+  </div>
+  <div class="input-group">
+    <label class="label">Confirm the password</label>
+    <input class="input" type="password" [(ngModel)]="confirmPass" id="confirm-pass" name="confirm-pass" required />
+  </div>
+  <div class="input-group">
+    <label class="label">Email</label>
+    <input class="input" type="email" [(ngModel)]="email" id="email" name="email" required />
+  </div>
+  <div class="buttons">
+    <button class="btn-submit">Register</button>
+    <a routerLink="/login" class="registration-link">Already have an account?</a>
+  </div>
+</form>

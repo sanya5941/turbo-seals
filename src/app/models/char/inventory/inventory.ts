@@ -4,8 +4,8 @@ import { Skills } from "../skills";
 export class Inventory {
     private things: InventoryThing[];
 
-    constructor() {
-        this.things = [];
+    constructor(things: InventoryThing[] = []) {
+        this.things = things;
     }
 
     public addThing(thing: InventoryThing): void {
