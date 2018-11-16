@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Char } from '../../models/char/char';
 import { PlayersService } from '../../services/players.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-page-player',
@@ -12,12 +13,20 @@ export class PagePlayerComponent implements OnInit {
   private char: Char;
 
   constructor(
-    private playersService: PlayersService
+    private playersService: PlayersService,
+    private router: Router
   ) { 
-    this.char = this.playersService.getPlayer().getChar();
+    this.playersService.getPlayer(player => {
+      if (!player) return this.router.navigateByUrl('/');
+      this.char = player.getChar();
+    });
   }
 
   ngOnInit() {
-    
+  }
+
+  private logout(): void {
+    this.playersService.logoutPlayer();
+    this.router.navigateByUrl('/');
   }
 }

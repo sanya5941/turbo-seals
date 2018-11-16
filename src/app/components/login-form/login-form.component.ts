@@ -31,22 +31,9 @@ export class LoginFormComponent implements OnInit {
     if (!this.pass.trim()) return;
 
     this.playersService.loginPlayer(this.email, this.pass).subscribe(response => {
-      if (!response.success) return console.log(response.message);
-
-      let char = new Char(response.char.name);
-      char.setLevel(response.char.level);
-      char.setMoney(response.char.money);
-      char.setExperience(response.char.experience);
-      char.setHealth(response.char.health);
-      char.setInventory(new Inventory(JSON.parse(response.char.inventory)));
-      char.setSkills(JSON.parse(response.char.skills));
-      char.setAvatarPath(response.char.avatarPath);
-
-      let player = new Player(response.player.email, response.player.password, char);
+      let player = this.playersService.getPlayerFromResponse(response);
       this.playersService.setPlayer(player);
-
       this.router.navigateByUrl('/player');
     });
   }
-
 }

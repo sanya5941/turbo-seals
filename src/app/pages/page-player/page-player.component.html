@@ -1,2 +1,5 @@
-<app-char [char]="char" [isPublic]="true"></app-char>
-<a routerLink="/arena">Arena</a>
+<div class="container">
+    <app-char [char]="char" [isPublic]="true"></app-char>
+    <a routerLink="/arena">Arena</a><br />
+    <button (click)="logout()">Log out</button>
+</div>

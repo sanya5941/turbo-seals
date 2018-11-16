@@ -11,12 +11,7 @@ export class CharComponent implements OnInit {
   @Input() char: Char;
   @Input() isPublic: boolean;
 
-  private allow: boolean;
-
   constructor() { 
-    this.allow = false;
-
-    console.log(this);
   }
 
   ngOnInit() {

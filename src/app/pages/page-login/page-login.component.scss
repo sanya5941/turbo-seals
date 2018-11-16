@@ -11,12 +11,12 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    padding-left: 10%;
 
     background-image: url(/assets/img/art.jpg);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain;
+    background-size: cover;
 
     .page-heading {
         font-family: 'gta';
@@ -24,7 +24,7 @@
 
         position: absolute;
         top: 40px;
-        left: 25%;
+        left: 10%;
 
         color: white;
         text-shadow: 0 0 37px black;

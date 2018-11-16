@@ -1,22 +1,22 @@
 import { Char } from "../char/char";
 
 export class Player {
-    private password: string;
+    private id: string;
     private email: string;
     private char: Char;
 
-    constructor(email: string, password: string, char: Char) {
+    constructor(id: string, email: string, char: Char) {
+        this.id = id;
         this.email = email;
-        this.password = password;
         this.char = char;
+    }
+
+    public getId(): string {
+        return this.id;
     }
 
     public getEmail(): string {
         return this.email;
-    }
-
-    public getPassword(): string {
-        return this.password;
     }
 
     public getChar(): Char {

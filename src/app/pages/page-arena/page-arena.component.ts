@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Char } from '../../models/char/char';
 import { CharsService } from '../../services/chars.service';
 import { PlayersService } from '../../services/players.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-page-arena',
@@ -17,10 +18,14 @@ export class PageArenaComponent implements OnInit {
 
   constructor(
     private charsService: CharsService,
-    private playersService: PlayersService
+    private playersService: PlayersService,
+    private router: Router
   ) { 
-    this.playerChar = this.playersService.getPlayer().getChar();
-    this.bot = charsService.getBot(this.playerChar);
+    this.playersService.getPlayer(player => {
+      if (!player) return this.router.navigateByUrl('/');
+      this.playerChar = player.getChar();
+      this.bot = this.charsService.getBot(this.playerChar);
+    });
 
     this.fighting = {
       logs: [],
@@ -54,5 +59,4 @@ export class PageArenaComponent implements OnInit {
   private addLog(log): void {
     this.fighting.logs.push(log);
   }
-
 }

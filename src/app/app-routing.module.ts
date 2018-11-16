@@ -5,22 +5,20 @@ import { PagePlayerComponent } from './pages/page-player/page-player.component';
 import { PageLoginComponent } from './pages/page-login/page-login.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
+import { PageAuthenticationComponent } from './pages/page-authentication/page-authentication.component';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', component: PageAuthenticationComponent },
   { path: 'player', component: PagePlayerComponent },
   { path: 'arena', component: PageArenaComponent },
   { 
-    path: '', 
+    path: 'login',
     component: PageLoginComponent,
     children: [
       {
         path: '',
-        redirectTo: 'login',
+        component: LoginFormComponent,
         pathMatch: 'full',
-      },
-      {
-        path: 'login',
-        component: LoginFormComponent
       },
       {
         path: 'registration',

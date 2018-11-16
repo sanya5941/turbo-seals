@@ -8,23 +8,8 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class CharsService {
-
-  private playerChar: Char;
-
   constructor(
-    private http: HttpClient
-  ) { 
-    this.playerChar = new Char('Alex');
-    this.playerChar.getSkills().power = 3;
-
-    let turbine = new Turbine('Стартовая турбина', 3); 
-    turbine.activate();
-    this.playerChar.getInventory().addThing(turbine);
-  }
-
-  public getPlayerChar(): Observable<any> {
-    return this.http.get('http://localhost:3000/chars');
-  }
+  ) { }
 
   public getBot(char: Char): Char {
     let bot = new Char('Bot');

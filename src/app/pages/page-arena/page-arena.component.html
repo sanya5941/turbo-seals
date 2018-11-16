@@ -1,8 +1,9 @@
-<div class="arena">
-  <div class="player">
-    <app-char [char]="playerChar"></app-char>
-  </div>
-  <div class="field">
+<div class="container">
+  <div class="arena">
+    <div class="player" *ngIf="playerChar">
+      <app-char [char]="playerChar"></app-char>
+    </div>
+    <div class="field">
       <h1 class="heading">Arena</h1>
       <button class="button-fight" *ngIf="!fighting.done" (click)="fight()">Go</button>
       <div class="logs">
@@ -13,10 +14,11 @@
       <div class="result">
         <p class="fighting.winner" *ngIf="fighting.done">{{ fighting.winner.getName() }} win!</p>
       </div>
+    </div>
+    <div class="bot">
+      <app-char [char]="bot"></app-char>
+    </div>
   </div>
-  <div class="bot">
-    <app-char [char]="bot"></app-char>
-  </div>
-</div>
 
-<a routerLink="/player">Home</a>
+  <a routerLink="/player">Home</a>
+</div>

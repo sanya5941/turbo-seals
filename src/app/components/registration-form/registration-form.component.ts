@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlayersService } from '../../services/players.service';
 import { Player } from '../../models/player/player';
 import { Char } from '../../models/char/char';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration-form',
@@ -16,7 +17,8 @@ export class RegistrationFormComponent implements OnInit {
   private email: string;
 
   constructor(
-    private playersService: PlayersService
+    private playersService: PlayersService,
+    private router: Router
   ) { 
     this.name = '';
     this.pass = '';
@@ -38,9 +40,11 @@ export class RegistrationFormComponent implements OnInit {
 
     if (this.pass !== this.confirmPass) return;
 
-    let player = new Player(this.email, this.pass, new Char(this.name));
-    this.playersService.registerPlayer(player).subscribe(response => {
-      if (response.success) console.log(response.message);
+    this.playersService.registerPlayer(this.email, this.pass, new Char(this.name)).subscribe(response => {
+      if (response.success) {
+        console.log(response.message);
+        return this.router.navigateByUrl('/login');
+      }
       else console.log(response.message);
     })
   }

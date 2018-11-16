@@ -12,6 +12,7 @@ import { PageLoginComponent } from './pages/page-login/page-login.component';
 import { FormsModule } from '@angular/forms';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
+import { PageAuthenticationComponent } from './pages/page-authentication/page-authentication.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { RegistrationFormComponent } from './components/registration-form/regist
     PageArenaComponent,
     PageLoginComponent,
     LoginFormComponent,
-    RegistrationFormComponent
+    RegistrationFormComponent,
+    PageAuthenticationComponent
   ],
   imports: [
     BrowserModule,
