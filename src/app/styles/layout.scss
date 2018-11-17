@@ -1,11 +1,11 @@
+@import './mixins.scss';
+
 .container {
     margin-left: auto;
     margin-right: auto;
     width: 90%;
     max-width: 1170px;
 }
-
-
 
 .form {
     width: 400px;
@@ -14,6 +14,10 @@
     background-color: rgba(white, .85);
     border: 1px solid gray;
     border-radius: 5px;
+
+    @include screen(xs) {
+        width: 100%;
+    }
 
     .form-heading {
         margin-bottom: 20px;

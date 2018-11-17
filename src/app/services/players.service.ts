@@ -11,35 +11,32 @@ import { Inventory } from '../models/char/inventory/inventory';
 export class PlayersService {
 
   private AUTH_KEY: string = 'auth';
+  private HASHED_PASS: string = 'auth2';
 
-  private player: Player
-  private url: string;
+  private player: Player;
+  private url: string = 'http://secretproject.of.by/players/';
+  // private url: string = 'http://localhost:3000/players/';
 
   constructor(
     private http: HttpClient
-  ) { 
-    this.url = 'http://localhost:3000/players/';
-  }
-
-  public createPlayers(player: Player): Observable<any> {
-    return this.http.post('http://localhost:3000/players/create', player, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    });
-  }
+  ) { }
 
   public setPlayer(player: Player): void {
     this.player = player;
     localStorage.setItem(this.AUTH_KEY, this.player.getId());
+    localStorage.setItem(this.HASHED_PASS, this.player.getHashedPass());
   }
 
-  public getPlayer(callback = (player) => {}): void {
+  public clearPlayer(): void {
+    this.player = null;
+  }
+
+  public getPlayer(callback: Function): void {
     if (this.player) return callback(this.player);
 
     let auth = this.getAuthentication();
     if (auth) {
-      this.loginPlayerById(auth).subscribe(response => {
+      this.getAuthorizedPlayer().subscribe(response => {
         let player = this.getPlayerFromResponse(response);
         this.setPlayer(player);
         return callback(player);
@@ -47,10 +44,6 @@ export class PlayersService {
     } else {
       return callback(null);
     }
-  }
-
-  public clearPlayer(): void {
-    this.player = null;
   }
 
   public registerPlayer(email: string, password: string, char: Char): Observable<any> {
@@ -76,19 +69,21 @@ export class PlayersService {
     });
   }
 
-  public loginPlayerById(id: string): Observable<any> {
-    return this.http.post(this.url + 'get', {
-      _id: id
+  private getAuthorizedPlayer(): Observable<any> {
+    return this.http.post(this.url + 'authorized', {
+      id: localStorage.getItem(this.AUTH_KEY),
+      hashedPassword: localStorage.getItem(this.HASHED_PASS)
     }, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
-    });
+    })
   }
 
   public logoutPlayer(): void {
     this.clearPlayer();
     localStorage.removeItem(this.AUTH_KEY);
+    localStorage.removeItem(this.HASHED_PASS);
   }
 
   public getPlayerFromResponse(response) {
@@ -102,15 +97,16 @@ export class PlayersService {
     char.setAvatarPath(response.player.char.avatarPath);
 
     let player = new Player(response.player._id, response.player.email, char);
+    player.setHashedPass(response.player.hashedPassword);
 
     return player;
   }
 
-  public getAuthentication(): string {
-    if (localStorage.getItem(this.AUTH_KEY)) {
-      return localStorage.getItem(this.AUTH_KEY);
+  public getAuthentication(): boolean {
+    if (localStorage.getItem(this.AUTH_KEY) && localStorage.getItem(this.HASHED_PASS)) {
+      return true;
     }
 
-    return null;
+    return false;
   }
 }

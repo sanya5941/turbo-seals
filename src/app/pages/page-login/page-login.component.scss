@@ -5,6 +5,8 @@
     font-style: normal;
 }
 
+@import '../../styles/mixins';
+
 .page-login {
     position: relative;
     width: 100%;
@@ -13,10 +15,18 @@
     align-items: center;
     padding-left: 10%;
 
-    background-image: url(/assets/img/art.jpg);
+    background-image: url(/assets/img/background.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+
+    @include screen(xs) {
+        padding-left: 0;
+    }
+
+    .login {
+        flex: 0 0 40%;
+    }
 
     .page-heading {
         font-family: 'gta';
@@ -28,5 +38,18 @@
 
         color: white;
         text-shadow: 0 0 37px black;
+
+        @include screen(xs) {
+            font-size: 5rem;
+        }
+    }
+
+    .img {
+        flex: 0 0 60%;
+        height: 100%;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 500px auto;
     }
 }

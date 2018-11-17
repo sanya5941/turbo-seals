@@ -1,0 +1,30 @@
+$break_xs: 480px;
+$break_sm: 767px;
+$break_md: 1023px;
+$break_lg: 1199px;
+
+@mixin screen($list) {
+    @if index($list, "xs") != null {
+        @media screen and (max-width: $break_xs) {
+            @content;
+        }
+    }
+
+    @if index($list, "sm") != null {
+        @media screen and (min-width: $break_xs + 1px) and (max-width: $break_sm){
+            @content;
+        }
+    }
+
+    @if index($list, "md") != null {
+        @media screen and (min-width: $break_sm + 1px) and (max-width: $break_md){
+            @content;
+        }
+    }
+
+    @if index($list, "lg") != null {
+        @media screen and (min-width: $break_md + 1px) {
+            @content;
+        }
+    }
+}
